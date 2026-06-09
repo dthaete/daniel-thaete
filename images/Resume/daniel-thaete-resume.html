@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Thaete — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── DT Brand Tokens ─────────────────────────────── */
+    :root {
+      --dt-charcoal:  #1C1C1A;
+      --dt-gold:      #B89A5A;
+      --dt-gold-pale: #F5F0E6;
+      --dt-ivory:     #FAF8F4;
+      --dt-rule:      #D6CFC4;
+      --dt-gold-mid:  #C8AE78;
+    }
+
+    /* ─── Reset / Base ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 10pt; }
+
+    body {
+      background: var(--dt-ivory);
+      color: var(--dt-charcoal);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ─── Page Shell ──────────────────────────────────── */
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      background: var(--dt-ivory);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ─── Gold Top Stripe ─────────────────────────────── */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--dt-gold), var(--dt-gold-mid), var(--dt-gold));
+    }
+
+    /* ─── Corner Ornament ─────────────────────────────── */
+    .corner-ornament {
+      position: absolute;
+      width: 36px; height: 36px;
+      border-color: var(--dt-gold);
+      border-style: solid;
+      opacity: 0.55;
+    }
+    .corner-ornament.tl { top: 18px; left: 18px; border-width: 1px 0 0 1px; }
+    .corner-ornament.tr { top: 18px; right: 18px; border-width: 1px 1px 0 0; }
+    .corner-ornament.bl { bottom: 18px; left: 18px; border-width: 0 0 1px 1px; }
+    .corner-ornament.br { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
+
+    /* ─── Inner Frame ─────────────────────────────────── */
+    .inner {
+      padding: 0.6in 0.65in 0.55in;
+    }
+
+    /* ─── Header ──────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 0.22in;
+      border-bottom: 0.5px solid var(--dt-rule);
+      margin-bottom: 0.22in;
+    }
+
+    .name-block {}
+
+    .name-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 7pt;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dt-gold);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 34pt;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--dt-charcoal);
+      letter-spacing: 0.01em;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--dt-gold);
+    }
+
+    .title-line {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 9.5pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dt-charcoal);
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 7.5pt;
+      line-height: 1.8;
+      color: var(--dt-charcoal);
+      opacity: 0.75;
+    }
+
+    .contact-block a {
+      color: var(--dt-gold);
+      text-decoration: none;
+    }
+
+    /* ─── Two-Column Body ─────────────────────────────── */
+    .body-cols {
+      display: grid;
+      grid-template-columns: 1fr 2.1fr;
+      column-gap: 0.4in;
+    }
+
+    /* ─── Section Labels ──────────────────────────────── */
+    .section {
+      margin-bottom: 0.22in;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 6.5pt;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dt-gold);
+      margin-bottom: 9px;
+      padding-bottom: 5px;
+      border-bottom: 0.5px solid var(--dt-rule);
+    }
+
+    /* ─── Diamond Divider ─────────────────────────────── */
+    .diamond {
+      display: inline-block;
+      width: 5px; height: 5px;
+      background: var(--dt-gold);
+      transform: rotate(45deg);
+      margin: 0 8px;
+      vertical-align: middle;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .divider-row {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 12px;
+    }
+    .divider-row::before,
+    .divider-row::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--dt-rule);
+    }
+
+    /* ─── Left Column ─────────────────────────────────── */
+
+    /* Skills */
+    .skill-category {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 7pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dt-charcoal);
+      margin: 9px 0 4px;
+    }
+
+    .skill-list {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 7.5pt;
+      line-height: 1.75;
+      color: var(--dt-charcoal);
+      opacity: 0.8;
+    }
+
+    /* Education */
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 8pt;
+      font-weight: 600;
+      color: var(--dt-charcoal);
+      line-height: 1.35;
+    }
+
+    .edu-school {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 7.5pt;
+      color: var(--dt-charcoal);
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .edu-year {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 6.5pt;
+      letter-spacing: 0.1em;
+      color: var(--dt-gold);
+      margin-top: 1px;
+    }
+
+    .edu-entry { margin-bottom: 11px; }
+
+    /* ─── Right Column ────────────────────────────────── */
+
+    .job {
+      margin-bottom: 0.18in;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+
+    .job-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--dt-charcoal);
+      letter-spacing: 0.01em;
+    }
+
+    .job-dates {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dt-gold);
+      white-space: nowrap;
+    }
+
+    .job-company {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 7.5pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dt-charcoal);
+      opacity: 0.6;
+      margin-bottom: 7px;
+    }
+
+    .job-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job-bullets li {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 8pt;
+      line-height: 1.65;
+      color: var(--dt-charcoal);
+      padding-left: 13px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .job-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 4px; height: 4px;
+      background: var(--dt-gold);
+      transform: rotate(45deg);
+      opacity: 0.65;
+    }
+
+    /* ─── Summary / Intro ─────────────────────────────── */
+    .summary-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--dt-charcoal);
+      opacity: 0.82;
+      margin-bottom: 0.2in;
+    }
+
+    /* ─── Right-col vertical rule ─────────────────────── */
+    .right-col {
+      border-left: 0.5px solid var(--dt-rule);
+      padding-left: 0.35in;
+    }
+
+    /* ─── Print ───────────────────────────────────────── */
+    @media print {
+      html { font-size: 10pt; }
+      body { background: #FAF8F4; }
+      .page {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+
+    @media screen {
+      body { padding: 0.3in 0; }
+      .page { box-shadow: 0 4px 40px rgba(28,28,26,0.13); }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Corner ornaments -->
+  <div class="corner-ornament tl"></div>
+  <div class="corner-ornament tr"></div>
+  <div class="corner-ornament bl"></div>
+  <div class="corner-ornament br"></div>
+
+  <div class="inner">
+
+    <!-- ── HEADER ─────────────────────────────────────── -->
+    <header class="header">
+      <div class="name-block">
+<h1>Daniel <em>Thaete</em></h1>
+        <div class="title-line">Senior Graphic Designer</div>
+      </div>
+      <div class="contact-block">
+        <p> <a href="https://daniel-thaete.vercel.app/">daniel-thaete.vercel.app</a><br>
+          <a href="714-292-9675">714-292-9675</a>
+        </p>
+        <p><a href="mailto:danielthaete@gmail.com">danielthaete@gmail.com</a></p>
+<p>
+          <a href="https://linkedin.com/in/daniel-thaete">linkedin.com/in/daniel-thaete</a> </p>
+      </div>
+    </header>
+
+    <!-- ── SUMMARY ─────────────────────────────────────── -->
+    <p class="summary-text">
+      Multi-disciplinary designer with over a decade of experience translating brand strategy into creative products, digital experiences, environmental activations, and motion. Fluent across print, web, and emerging media, with a deep commitmen<br>
+to craft at every scale. </p>
+
+    <!-- ── BODY COLUMNS ───────────────────────────────── -->
+    <div class="body-cols">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <!-- Skills -->
+        <div class="section">
+          <div class="section-label">Expertise</div>
+
+          <div class="skill-category">Brand &amp; Identity</div>
+          <div class="skill-list">
+            Visual systems &amp; guidelines<br>
+            Logo development<br>
+            Brand strategy<br>
+            
+          </div>
+
+          <div class="skill-category">Digital &amp; Web</div>
+          <div class="skill-list">
+            HTML5 / CSS3 / JavaScript<br>
+            Responsive &amp; interactive design<br>
+            Lottie / After Effects animation<br>
+            Display  banner &amp; Social<br>
+            UX/UI design
+          </div>
+
+          <div class="skill-category">Print</div>
+          <div class="skill-list">
+            <p> Environmental graphics</p>
+            <p>Multi-piece print systems<br>
+              Event &amp; experiential design<br>
+              Magazine layout design<br>
+              Posters &amp; flyers</p>
+            <p>Direct mail&nbsp;</p>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="section">
+          <div class="section-label">Tools</div>
+          <div class="skill-list">
+            <p> Adobe Creative Cloud: Illustrator ·              Photoshop · InDesign · 
+              After Effects · XD<br>
+              Figma &nbsp;</p>
+            <p>Lottie<br>
+            VS Code</p>
+            <p>GitHub </p>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+          <div class="section-label">Education</div>
+
+          <div class="edu-entry">
+            <div class="edu-degree">BFA, Graphic Design</div>
+            <div class="edu-school">California State University, Fullerton</div>
+            <div class="edu-year">2013</div>
+          </div>
+
+          <div class="edu-entry">
+            <div class="edu-degree">Certificate, Web Design &amp; Development</div>
+            <div class="edu-school">University of California, Irvine</div>
+            <div class="edu-year">2018</div>
+          </div>
+        </div>
+
+      </div><!-- /left-col -->
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- Experience -->
+        <div class="section">
+          <div class="section-label">Experience</div>
+
+          <!-- AAA -->
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Senior Graphic Designer</div>
+              <div class="job-dates">Sep 2019 - Current</div>
+            </div>
+            <div class="job-company">Automobile Club of Southern California (AAA) &nbsp;·&nbsp; In-house</div>
+            <ul class="job-bullets">
+              <li>Lead creative execution across print, digital, environmental, and motion disciplines.</li>
+              
+              <li>Design graphics with a focus on brand alignment, collaborating cross-functionall<br>
+with marketing, product, and executive stakeholders to align creative output wit<br>
+business goals.&nbsp;</li>
+              <li>Produce monthly    HTML5 animated display banners for  travel partners across four&nbsp; standard display sizes using an <em>Illustrator → After Effects → HTML5</em> workflow, build<br>
+for speed-to-market.</li>
+
+<li>Designed the 2026 Acura Grand Prix of Long Beach event system: a 12-deliverable campaign spanning dual-audience messaging, hero cards, a 60-ft travel wall, AI-powered trading card activation, and a sweepstakes system. &nbsp;</li>
+              <li>Redesigned AAA membership card visual hierarchy. Simplified layout and added QR code integration, which measurably increased app adoption and reduced misdirected inbound calls.&nbsp;</li>
+            </ul>
+          </div>
+
+          <div class="divider-row"><span class="diamond"></span></div>
+
+          <!-- KWSM -->
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Web Designer</div>
+              <div class="job-dates">Mar 2018 - Aug 2019</div>
+            </div>
+            <div class="job-company">KWSM &nbsp;·&nbsp; Agency</div>
+            <ul class="job-bullets">
+              <li>Designed and built client-facing websites and digital campaigns for a diverse agency roster spanning retail, hospitality, and professional services.</li>
+              <li>Translated brand guidelines into responsive, pixel-perfect web experiences balancing aesthetic integrity with technical performance.</li>
+              <li>Developed reusable component libraries and design systems to accelerate delivery across concurrent accounts.</li>
+            </ul>
+          </div>
+
+        </div><!-- /section experience -->
+
+          <div class="divider-row"><span class="diamond"></span></div>
+
+          <!-- Rushmore -->
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Graphic Designer</div>
+              <div class="job-dates">Feb 2014 - May 2017</div>
+            </div>
+            <div class="job-company">Rushmore Loan Management Services LLC &nbsp;·&nbsp; In-house</div>
+            <ul class="job-bullets">
+              <li>Developed brand collateral, sales materials, and visual communications for a B2B and B2C focused conglomerate.</li>
+              <li>Designed print and digital assets supporting business development, client presentations, and internal communications.</li>
+              <li>Maintained brand consistency across deliverables while adapting creative to meet the specific needs of business audiences.</li>
+            </ul>
+          </div>
+
+      </div><!-- /right-col -->
+
+    </div><!-- /body-cols -->
+
+  </div><!-- /inner -->
+</div><!-- /page -->
+</body>
+</html>
